@@ -1,10 +1,15 @@
-import PromptForm from "@/components/promptForm";
+"use client";
+import BgCircle from "@/components/BgCircle";
+import MainCard from "@/components/Article/MainCard";
+import ArticleContext from "./contexts/ArticleContext";
 
 export default function Home() {
-  return (
-    <main className="flex bg-red-400 min-h-screen flex-col items-center justify-between p-24">
-      <h1 className="text-2xl h-fit font-semibold tracking-wider">OneNews!</h1>
-      <PromptForm />
-    </main>
-  );
+    return (
+        <>
+            <BgCircle background="bg-cream-100" />
+            <ArticleContext>
+                <MainCard />
+            </ArticleContext>
+        </>
+    );
 }

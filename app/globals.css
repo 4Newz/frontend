@@ -2,26 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Reset */
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Custom classess */
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+/* animations */
+html {
+    --anim-speed: 500ms;
+}
+
+.fadeInOut {
+    animation: fadeIn var(--anim-speed) linear forwards;
+}
+
+.fadeInOut:not(.animActive) {
+    animation: fadeOut var(--anim-speed) linear forwards;
+}
+
+.dropInOut {
+    animation: dropIn var(--anim-speed) linear forwards;
+}
+
+.dropInOut:not(.animActive) {
+    animation: dropOut var(--anim-speed) linear forwards;
+}
+
+.shake,
+.shakeInput input {
+    --offset-angle: 4deg;
+    animation: jump-shaking var(--anim-speed) linear;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        display: none;
+    }
+}
+
+@keyframes dropIn {
+    from {
+        transform: translateY(-1rem);
+    }
+    to {
+        transform: translateY(0rem);
+    }
+}
+
+@keyframes dropOut {
+    from {
+        transform: translateY(0rem);
+    }
+    to {
+        transform: translateY(-1rem);
+    }
+}
+
+@keyframes jump-shaking {
+    0% {
+        transform: translateX(0);
+    }
+    35% {
+        transform: rotate(var(--offset-angle));
+    }
+    55% {
+        transform: rotate(calc(var(--offset-angle) * -1));
+    }
+    65% {
+        transform: rotate(var(--offset-angle));
+    }
+    75% {
+        transform: rotate(calc(var(--offset-angle) * -1));
+    }
+    100% {
+        transform: rotate(0);
+    }
 }
