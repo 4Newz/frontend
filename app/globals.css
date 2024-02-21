@@ -10,6 +10,11 @@ button:focus {
     outline: none;
 }
 
+/* Custom classess */
+.scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+}
+
 /* animations */
 html {
     --anim-speed: 500ms;

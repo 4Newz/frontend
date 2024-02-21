@@ -28,7 +28,9 @@ function generateSubTemplate(): [string[], string] {
     let areas: string[];
     let gridTemplateArea: string;
     let grid2D: string[][];
-    switch (Math.floor(Math.random() * 4)) {
+    const caseValue = Math.floor(Math.random() * 4);
+    console.log(caseValue);
+    switch (caseValue) {
         case 0:
             areas = idArrayGenerator(4, 4).map((id) => `area_${id}`);
             /*

@@ -23,6 +23,7 @@ export default function Modal() {
                 setLoading(true);
                 try {
                     await addArticle(prompt);
+                    handleClose();
                 } catch (e) {
                     console.log(e);
                 } finally {
@@ -32,9 +33,10 @@ export default function Modal() {
                 }
                 setLoading(false);
             }
-        } else if (modalState === modalEnum.clear_news) clearNews();
-
-        handleClose();
+        } else if (modalState === modalEnum.clear_news) {
+            clearNews();
+            handleClose();
+        }
     };
 
     useEffect(() => {

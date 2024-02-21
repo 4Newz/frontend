@@ -1,9 +1,11 @@
 import { useArticle } from "@/app/contexts/ArticleContext";
 import { refreshTemplate } from "@/lib/gridTemplate";
 import React, { useEffect, useMemo, useState } from "react";
+import Article from "./Article";
 
 export default function ArticleSection() {
     const rowHeight = 300;
+    const columWidth = "25%";
     const { articles } = useArticle()!;
     const [templateConfig, setTemplateConfig] = useState<templateConfig_T>({
         gridTemplateArea: "",
@@ -14,14 +16,11 @@ export default function ArticleSection() {
         () => (
             <>
                 {articles.map((article, index) => (
-                    <div
+                    <Article
+                        gridArea={templateConfig.areas[index]}
+                        article={article}
                         key={index}
-                        className="flex flex-col"
-                        style={{ gridArea: templateConfig.areas[index] }}
-                    >
-                        <h3>{article.heading}</h3>
-                        <p>{article.content}</p>
-                    </div>
+                    />
                 ))}
             </>
         ),
@@ -33,11 +32,9 @@ export default function ArticleSection() {
         setTemplateConfig(refreshTemplate(articles, templateConfig));
     }, [articles]);
 
-    console.log(templateConfig.gridTemplateArea);
-
     return (
         <section
-            className="w-full h-full overflow-auto grid"
+            className="w-full h-full overflow-auto grid gap-8"
             style={{
                 gridAutoRows: rowHeight,
                 gridTemplateAreas: templateConfig.gridTemplateArea,

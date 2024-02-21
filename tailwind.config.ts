@@ -22,6 +22,7 @@ const config: Config = {
             },
             fontFamily: {
                 poppins: "var(--font-poppin)",
+                franklin: "var(--font-franklin)",
             },
         },
     },
