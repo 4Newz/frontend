@@ -38,7 +38,7 @@ export async function POST(req: Request) {
             prompt,
             data.map((value: any) => value.description.slice(0, 25))
         );
-        const result = data.map((value, index) => ({
+        const result = (data as any[]).map((value, index) => ({
             ...value,
             ...similarityIndex[index],
         }));

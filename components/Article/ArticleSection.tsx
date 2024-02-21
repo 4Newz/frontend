@@ -34,7 +34,7 @@ export default function ArticleSection() {
 
     return (
         <section
-            className="w-full h-full overflow-auto grid gap-8"
+            className="w-full h-full overflow-auto scrollbar-hidden grid gap-8"
             style={{
                 gridAutoRows: rowHeight,
                 gridTemplateAreas: templateConfig.gridTemplateArea,
