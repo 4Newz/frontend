@@ -31,8 +31,17 @@ export default function ArticleContext({
     const clearNews = () => {
         setArticles([]);
     };
+
+    console.log(articles);
+
     const addArticle = async (heading: string) => {
-        await new Promise((res) => setTimeout(res, 3000));
+        console.log("context", heading);
+        const response = await fetch("/api/article", {
+            method: "POST",
+            body: JSON.stringify({ heading: heading }),
+        });
+        const data = await response.json();
+        setArticles((articles) => [data, ...articles]);
         return true;
     };
 

@@ -23,13 +23,18 @@ export default function Modal() {
                 setLoading(true);
                 try {
                     await addArticle(prompt);
-                    handleClose();
                 } catch (e) {
                     console.log(e);
+                } finally {
+                    setTimeout(() => {
+                        promptRef.current!.value = "";
+                    }, 1500);
                 }
                 setLoading(false);
             }
         } else if (modalState === modalEnum.clear_news) clearNews();
+
+        handleClose();
     };
 
     useEffect(() => {
@@ -50,7 +55,7 @@ export default function Modal() {
                 return (
                     <div>
                         <h3 className="font-bold text-2xl w-full text-center  text-black-800 ">
-                            Enter a prompt heading{shake}
+                            Enter a prompt heading
                         </h3>
                         <div className="py-4">
                             <input
