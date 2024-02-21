@@ -12,15 +12,9 @@ export enum modalEnum {
 }
 
 export default function MainCard() {
-    // const [modalState, setModalState] = useState<modalEnum>(modalEnum.closed);
-    // // const handleAddArticle = () => setModalState(modalEnum.add_article);
-    // // const handleClearNews = () => setModalState(modalEnum.clear_news);
-
-    const { handleAddArticle, handleClearNews, handleClose } = useArticle()!;
-
     return (
         <main className="min-h-screen p-16 h-0 font-poppins">
-            <div className="w-full h-full rounded-3xl bg-white-25 backdrop-blur-2xl shadow-2xl p-8">
+            <div className="w-full h-full rounded-3xl bg-white-25 backdrop-blur-2xl shadow-2xl p-8 flex flex-col gap-8">
                 <Nav />
                 <ArticleSection />
                 <Modal />

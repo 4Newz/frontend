@@ -4,3 +4,9 @@ interface article_T {
 }
 
 type articleCollection_T = article_T[];
+
+type templateConfig_T = {
+    gridTemplateArea: string;
+    areas: string[];
+    availableSpace: number;
+};
