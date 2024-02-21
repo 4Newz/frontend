@@ -18,6 +18,7 @@ const config: Config = {
                 "black-800": "#2A2A2A",
                 "brown-600": "#AF695C",
                 "white-25": "#FFFFFF40",
+                "black-25": "#00000040",
             },
             fontFamily: {
                 poppins: "var(--font-poppin)",

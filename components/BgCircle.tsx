@@ -16,7 +16,7 @@ export default function BgCircle({
                 position="-bottom-1/2 -left-1/4"
             />
             <Circle
-                radius="w-[1100px]"
+                radius="w-[1200px]"
                 bg="bg-radial-brown"
                 position="-top-1/2 -right-1/4"
             />
