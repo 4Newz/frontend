@@ -47,7 +47,7 @@ export default function Modal() {
                         <h3 className="font-bold text-2xl w-full text-center  text-black-800 ">
                             Clear Newspaper
                         </h3>
-                        <p className="py-4">
+                        <p className="py-4 max-w-sm text-center">
                             Clearing this newspaper will permanently delete it.
                             Are you sure you want to continue?
                         </p>
@@ -63,7 +63,7 @@ export default function Modal() {
                             <input
                                 type="text"
                                 name="prompt"
-                                className={`w-full bg-cream-100 rounded-md p-2`}
+                                className={`w-96 bg-cream-100 rounded-md p-2 `}
                                 ref={promptRef}
                             />
                         </div>
@@ -83,7 +83,7 @@ export default function Modal() {
             onClick={handleClose}
         >
             <div
-                className={`bg-brown-600 bg-opacity-70 backdrop-blur-3xl rounded-3xl max-w-[32rem] h-fit dropInOut p-8 ${
+                className={`bg-brown-600 bg-opacity-70 backdrop-blur-3xl rounded-3xl  h-fit dropInOut p-8 ${
                     modalState !== modalEnum.closed ? "animActive" : ""
                 }`}
                 onClick={(e) => e.stopPropagation()}
