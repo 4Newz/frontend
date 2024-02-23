@@ -1,4 +1,5 @@
 import { modalEnum } from "@/components/Article/MainCard";
+import { appendToLocalArticle, readLocalArticles } from "@/lib/localStorage";
 import React, { useContext, createContext, useState } from "react";
 
 type ContextValue_T = {
@@ -38,9 +39,13 @@ export default function ArticleContext({
         try {
             const response = await fetch("/api/article", {
                 method: "POST",
-                body: JSON.stringify({ heading: heading }),
+                body: JSON.stringify({
+                    heading: heading,
+                    articles: readLocalArticles(),
+                }),
             });
             const data: article_T = await response.json();
+            appendToLocalArticle(data);
             setArticles((articles) => [...articles, data]);
             return true;
         } catch (e) {
