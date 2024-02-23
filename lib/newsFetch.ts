@@ -6,5 +6,5 @@ export async function newsFetch(prompt: string) {
         "apiKey=" +
         process.env.NEWS_API_KEY;
     const response = await (await fetch(url, { method: "GET" })).json();
-    return response;
+    return response.articles;
 }

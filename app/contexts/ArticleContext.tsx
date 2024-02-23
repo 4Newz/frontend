@@ -35,13 +35,18 @@ export default function ArticleContext({
     console.log(articles);
 
     const addArticle = async (heading: string) => {
-        const response = await fetch("/api/article", {
-            method: "POST",
-            body: JSON.stringify({ heading: heading }),
-        });
-        const data = await response.json();
-        setArticles((articles) => [...articles, data]);
-        return true;
+        try {
+            const response = await fetch("/api/article", {
+                method: "POST",
+                body: JSON.stringify({ heading: heading }),
+            });
+            const data: article_T = await response.json();
+            setArticles((articles) => [...articles, data]);
+            return true;
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
     };
 
     return (
