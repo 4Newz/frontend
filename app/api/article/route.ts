@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     const url =
         process.env.BACKEND +
         `kamisama_tasukete/?query=${payload.heading}&model=${payload.model}`;
-    console.log(payload);
+
     const response = await fetch(url, {
         method: "GET",
         // body: JSON.stringify(payload),
@@ -26,7 +26,6 @@ export async function POST(req: Request) {
         // },
     });
     const data: response_T = await response.json();
-    console.log(data);
     // let news = await newsFetch(payload.heading);
     // news = news.slice(0, 5).map((news_singular: any) => ({
     //     heading: news_singular.title,

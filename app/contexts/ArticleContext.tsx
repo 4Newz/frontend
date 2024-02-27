@@ -44,6 +44,7 @@ export default function ArticleContext({
                 }),
             });
             const data: article_T = await response.json();
+            console.log(data);
             appendToLocalArticle(data);
             setArticles((articles) => [...articles, data]);
             return true;
