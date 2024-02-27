@@ -17,7 +17,6 @@ export default async function Home({ params }: Props_T) {
             body: JSON.stringify({ prompt: params.slug, size: 10 }),
         })
     ).json();
-    console.log(articles);
     return (
         <main className="flex bg-red-400 min-h-screen flex-col items-center justify-between p-24">
             <p className="text-4xl text-black">{"prompt"}</p>

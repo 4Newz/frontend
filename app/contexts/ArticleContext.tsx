@@ -33,14 +33,13 @@ export default function ArticleContext({
         setArticles([]);
     };
 
-    console.log(articles);
-
     const addArticle = async (heading: string) => {
         try {
             const response = await fetch("/api/article", {
                 method: "POST",
                 body: JSON.stringify({
                     heading: heading,
+                    model: "gpt3.5",
                     articles: readLocalArticles(),
                 }),
             });
