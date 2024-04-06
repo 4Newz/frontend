@@ -1,3 +1,5 @@
+import { articleCollection_T, article_T } from "@/app/types/articles";
+
 const key = "articles";
 
 export function clearLocalArticles() {

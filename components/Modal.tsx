@@ -3,6 +3,15 @@ import { useArticle } from "@/app/contexts/ArticleContext";
 import React, { useEffect, useRef, useState } from "react";
 import { modalEnum } from "./Article/MainCard";
 import { Oval } from "react-loader-spinner";
+import {
+    Select,
+    SelectContent,
+    SelectGroup,
+    SelectItem,
+    SelectLabel,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select";
 
 type Props_T = {};
 
@@ -12,6 +21,11 @@ export default function Modal() {
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
     const promptRef = useRef<HTMLInputElement>(null);
+    const [model, setModel] = useState<"gpt3.5" | "gemini">("gpt3.5");
+
+    const handleSelectChange = (value: "gpt3.5" | "gemini") => {
+        setModel(value);
+    };
 
     const handleConfirm = async () => {
         if (modalState === modalEnum.add_article) {
@@ -22,7 +36,7 @@ export default function Modal() {
             } else {
                 setLoading(true);
                 try {
-                    await addArticle(prompt);
+                    await addArticle(prompt, model);
                     handleClose();
                 } catch (e) {
                     console.log(e);
@@ -38,6 +52,33 @@ export default function Modal() {
             handleClose();
         }
     };
+
+    const renderSelect = () => (
+        <Select defaultValue="gpt3.5" onValueChange={handleSelectChange}>
+            <SelectTrigger
+                className="bg-cream-100 focus:!outline-none max-w-[160px]"
+                style={{ boxShadow: "none" }}
+            >
+                <SelectValue placeholder="Model" />
+            </SelectTrigger>
+            <SelectContent className="bg-cream-100 ">
+                <SelectGroup>
+                    <SelectItem
+                        value="gpt3.5"
+                        className="focus:bg-brown-600 focus:bg-opacity-30"
+                    >
+                        GPT3.5
+                    </SelectItem>
+                    <SelectItem
+                        value="gemini"
+                        className="focus:bg-brown-600 focus:bg-opacity-30"
+                    >
+                        Gemini
+                    </SelectItem>
+                </SelectGroup>
+            </SelectContent>
+        </Select>
+    );
 
     useEffect(() => {
         const renderContent = () => {
@@ -59,13 +100,14 @@ export default function Modal() {
                         <h3 className="font-bold text-2xl w-full text-center  text-black-800 ">
                             Enter a prompt heading
                         </h3>
-                        <div className="py-4">
+                        <div className="py-4 flex gap-2">
                             <input
                                 type="text"
                                 name="prompt"
-                                className={`w-96 bg-cream-100 rounded-md p-2 `}
+                                className={`w-full bg-cream-100 rounded-md p-2 `}
                                 ref={promptRef}
                             />
+                            {renderSelect()}
                         </div>
                     </div>
                 );
@@ -83,7 +125,7 @@ export default function Modal() {
             onClick={handleClose}
         >
             <div
-                className={`bg-brown-600 bg-opacity-70 backdrop-blur-3xl rounded-3xl  h-fit dropInOut p-8 ${
+                className={`w-full max-w-xl bg-brown-600 bg-opacity-70 backdrop-blur-3xl rounded-3xl  h-fit dropInOut p-8 ${
                     modalState !== modalEnum.closed ? "animActive" : ""
                 }`}
                 onClick={(e) => e.stopPropagation()}
@@ -91,8 +133,8 @@ export default function Modal() {
                 {renderedData}
                 <div className="flex gap-2 justify-center ">
                     {[
-                        { label: "Confirm", onClick: handleConfirm },
                         { label: "Cancel", onClick: handleClose },
+                        { label: "Confirm", onClick: handleConfirm },
                     ].map((btn) => (
                         <button
                             disabled={loading}

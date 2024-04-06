@@ -2,6 +2,7 @@ import { useArticle } from "@/app/contexts/ArticleContext";
 import { refreshTemplate } from "@/lib/gridTemplate";
 import React, { useEffect, useMemo, useState } from "react";
 import Article from "./Article";
+import { templateConfig_T } from "@/app/types/articles";
 
 export default function ArticleSection() {
     const rowHeight = 300;
