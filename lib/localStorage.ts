@@ -10,6 +10,11 @@ export function readLocalArticles() {
     const articles: articleCollection_T = JSON.parse(
         localStorage.getItem(key)!
     );
+
+    if (!articles) {
+        clearLocalArticles();
+        return [];
+    }
     return articles;
 }
 
