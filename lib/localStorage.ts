@@ -3,25 +3,41 @@ import { articleCollection_T, article_T } from "@/app/types/articles";
 const key = "articles";
 
 export function clearLocalArticles() {
-    localStorage.setItem(key, "[]");
+    try {
+        localStorage.setItem(key, "[]");
+    } catch (e) {
+        console.log("localStorage operation failed");
+    }
 }
 
 export function readLocalArticles() {
-    const articles: articleCollection_T = JSON.parse(
-        localStorage.getItem(key)!
-    );
+    try {
+        const articles: articleCollection_T = JSON.parse(
+            localStorage.getItem(key)!
+        );
 
-    if (!articles) {
-        clearLocalArticles();
+        if (!articles) {
+            clearLocalArticles();
+            return [];
+        }
+        return articles;
+    } catch (e) {
+        console.log("localStorage operation failed");
+    } finally {
         return [];
     }
-    return articles;
 }
 
 export function appendToLocalArticle(article: article_T) {
-    let articles: articleCollection_T = JSON.parse(localStorage.getItem(key)!);
-    if (articles) articles.push(article);
-    else articles = [article];
-    const stringifiedJson = JSON.stringify(articles);
-    localStorage.setItem(key, stringifiedJson);
+    try {
+        let articles: articleCollection_T = JSON.parse(
+            localStorage.getItem(key)!
+        );
+        if (articles) articles.push(article);
+        else articles = [article];
+        const stringifiedJson = JSON.stringify(articles);
+        localStorage.setItem(key, stringifiedJson);
+    } catch (e) {
+        console.log("localStorage operation failed");
+    }
 }

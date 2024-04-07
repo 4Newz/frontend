@@ -35,16 +35,18 @@ export default function Modal() {
                 setTimeout(() => setShake(false), 1500);
             } else {
                 setLoading(true);
-                try {
-                    await addArticle(prompt, model);
+
+                if (await addArticle(prompt, model)) {
                     handleClose();
-                } catch (e) {
-                    console.log(e);
-                } finally {
-                    setTimeout(() => {
-                        promptRef.current!.value = "";
-                    }, 1500);
+                } else {
+                    setShake(true);
+                    setTimeout(() => setShake(false), 1500);
                 }
+
+                setTimeout(() => {
+                    promptRef.current!.value = "";
+                }, 1500);
+
                 setLoading(false);
             }
         } else if (modalState === modalEnum.clear_news) {

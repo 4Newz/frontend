@@ -18,13 +18,17 @@ export async function POST(req: Request) {
         `generate_article/?query=${payload.heading}&model=${payload.model}`;
 
     const response = await fetch(url, { method: "GET" });
-    const data: response_T = await response.json();
-    const result: article_T = {
-        heading: payload.heading,
-        content: data.summary,
-        articles: data.articles,
-        reference: data.reference,
-    };
-
-    return new Response(JSON.stringify(result), { status: 200 });
+    try {
+        const data: response_T = await response.json();
+        const result: article_T = {
+            heading: payload.heading,
+            content: data.summary,
+            articles: data.articles,
+            reference: data.reference,
+        };
+        return new Response(JSON.stringify(result), { status: 200 });
+    } catch (err) {
+        console.log(err);
+        return new Response(JSON.stringify({ error: err }), { status: 500 });
+    }
 }

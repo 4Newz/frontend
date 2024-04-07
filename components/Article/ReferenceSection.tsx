@@ -20,10 +20,8 @@ function ReferenceSection({ children, similarity, source, active }: Props) {
                 <span
                     className={`${
                         active &&
-                        (similarity > 0.5
-                            ? "hover:bg-green-100"
-                            : "hover:bg-red-300")
-                    }`}
+                        (similarity > 0.5 ? "bg-green-100" : "bg-red-300")
+                    } transition-[color]`}
                 >
                     {children}
                 </span>

@@ -58,12 +58,13 @@ export default function ArticleContext({
                     model,
                 }),
             });
+            if (response.status !== 200) throw new Error("News Fetch Failed");
             const data = (await response.json()) as article_T;
             appendToLocalArticle(data);
             setArticles((articles) => [...articles, data]);
             return true;
         } catch (e) {
-            console.log(e);
+            console.log((e as Error).message);
             return false;
         }
     };
