@@ -1,3 +1,4 @@
+import { articleCollection_T, templateConfig_T } from "@/app/types/articles";
 import { idArrayGenerator } from "./helper";
 
 export function refreshTemplate(
