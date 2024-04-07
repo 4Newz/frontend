@@ -15,13 +15,13 @@ function ReferenceCard({ url, image, heading, similarity }: Props) {
     };
 
     return (
-        <div className="flex gap-1 ">
+        <div className="flex gap-1 text-grey-100">
             <img
                 src={image}
                 alt="Article Image"
                 className="w-20 h-20 rounded-lg"
             />
-            <div className="w-1 h-full bg-cream-100 bg-opacity-0" />
+            <div className="w-1 h-full bg-cream-100 " />
             <div className="flex flex-col justify-between">
                 <a
                     href={url}
@@ -39,10 +39,10 @@ function ReferenceCard({ url, image, heading, similarity }: Props) {
                         ?.at(1)}
                 </span>
                 <span
-                    className="font-semibold w-full text-right"
+                    className="font-semibold ml-auto bg-grey-100 rounded-full w-fit p-1 "
                     style={{ color: generateColor() }}
                 >
-                    {similarity.toPrecision(1)}
+                    <div className="">{similarity.toPrecision(1)}</div>
                 </span>
             </div>
         </div>

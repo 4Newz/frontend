@@ -23,7 +23,6 @@ export function readLocalArticles() {
         return articles;
     } catch (e) {
         console.log("localStorage operation failed");
-    } finally {
         return [];
     }
 }

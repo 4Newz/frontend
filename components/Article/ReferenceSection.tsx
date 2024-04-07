@@ -26,7 +26,7 @@ function ReferenceSection({ children, similarity, source, active }: Props) {
                     {children}
                 </span>
             </HoverCardTrigger>
-            <HoverCardContent className="bg-brown-600 bg-opacity-70 border-none w-fit max-w-[24rem] h-fit">
+            <HoverCardContent className="bg-brown-600  border-none w-fit max-w-[24rem] h-fit">
                 <ReferenceCard {...{ similarity, ...source }} />
             </HoverCardContent>
         </HoverCard>
