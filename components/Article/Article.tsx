@@ -2,6 +2,7 @@ import { Source_T, article_T } from "@/app/types/articles";
 import React, { ReactNode, useState } from "react";
 import ReferenceSection from "./ReferenceSection";
 import { Switch } from "@/components/ui/switch";
+import Markdown from "markdown-to-jsx";
 
 type Props_T = {
     article: article_T;
@@ -50,7 +51,8 @@ export default function Article({ article, gridArea }: Props_T) {
                             {...props}
                             key={`${props.source}${index}`}
                         >
-                            {content}
+                            {" "}
+                            <Markdown>{content}</Markdown>
                         </ReferenceSection>
                     );
                 })}
