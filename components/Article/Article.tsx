@@ -3,6 +3,8 @@ import React, { ReactNode, useState } from "react";
 import ReferenceSection from "./ReferenceSection";
 import { Switch } from "@/components/ui/switch";
 import Markdown from "markdown-to-jsx";
+import { commonBtnStyle } from "./Nav";
+import { useArticle } from "@/app/contexts/ArticleContext";
 
 type Props_T = {
     article: article_T;
@@ -18,6 +20,10 @@ type root_T = {
 
 export default function Article({ article, gridArea }: Props_T) {
     const [active, setActive] = useState(false);
+    const { handleQuestionArticle } = useArticle()!;
+    const handleQuestion = () => {
+        handleQuestionArticle(article);
+    };
     const formatAritcle = () => {
         let index = 0;
         const sentences: string[] | ReactNode[] = article.content.split(".");
@@ -68,6 +74,12 @@ export default function Article({ article, gridArea }: Props_T) {
                     className="data-[state=checked]:!bg-brown-600 !bg-cream-100"
                     onClick={() => setActive(!active)}
                 />
+                <button
+                    className={commonBtnStyle + " rounded-full h-8"}
+                    onClick={handleQuestion}
+                >
+                    ?
+                </button>
             </h3>
 
             <p className="overflow-auto scrollbar-hidden text-justify text-xl font-light">

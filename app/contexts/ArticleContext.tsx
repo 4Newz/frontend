@@ -15,6 +15,8 @@ type ContextValue_T = {
     handleClearNews: () => void;
     handleClose: () => void;
     clearNews: () => void;
+    handleQuestionArticle: (article: article_T) => void;
+    questionArticle: article_T | null;
     addArticle: (
         prompt: string,
         model: "gpt3.5" | "gemini"
@@ -33,10 +35,17 @@ export default function ArticleContext({
     children: React.ReactNode;
 }) {
     const [articles, setArticles] = useState<article_T[]>([]);
+    const [questionArticle, setQuestionArticle] = useState<article_T | null>(
+        null
+    );
     const [modalState, setModalState] = useState<modalEnum>(modalEnum.closed);
     const handleAddArticle = () => setModalState(modalEnum.add_article);
     const handleClearNews = () => setModalState(modalEnum.clear_news);
     const handleClose = () => setModalState(modalEnum.closed);
+    const handleQuestionArticle = (article: article_T) => {
+        setQuestionArticle(article);
+        setModalState(modalEnum.question_article);
+    };
     const clearNews = () => {
         setArticles([]);
         clearLocalArticles();
@@ -80,6 +89,8 @@ export default function ArticleContext({
                 handleClose,
                 clearNews,
                 addArticle,
+                handleQuestionArticle,
+                questionArticle,
             }}
         >
             {children}

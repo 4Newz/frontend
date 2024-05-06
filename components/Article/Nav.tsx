@@ -3,10 +3,9 @@ import React from "react";
 import { MdCancelPresentation } from "react-icons/md";
 import { TbCirclePlus } from "react-icons/tb";
 
+export const commonBtnStyle =
+    "bg-brown-600 font-light h-12 flex items-center p-2 gap-2  hover:brightness-90 active:scale-95";
 export default function Nav() {
-    const commonBtnStyle =
-        "bg-brown-600 font-light h-12 flex items-center p-2 gap-2  hover:brightness-90 active:scale-95";
-
     const { handleAddArticle, handleClearNews } = useArticle()!;
 
     return (

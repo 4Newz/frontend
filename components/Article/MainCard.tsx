@@ -9,6 +9,7 @@ export enum modalEnum {
     closed,
     add_article,
     clear_news,
+    question_article,
 }
 
 export default function MainCard() {

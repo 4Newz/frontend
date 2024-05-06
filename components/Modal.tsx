@@ -12,17 +12,20 @@ import {
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select";
+import { answerQuestion } from "@/lib/answerQuestion";
+import Markdown from "markdown-to-jsx";
 
 type Props_T = {};
 
 export default function Modal() {
-    const { modalState, handleClose, clearNews, addArticle } = useArticle()!;
+    const { modalState, handleClose, clearNews, addArticle, questionArticle } =
+        useArticle()!;
     const [renderedData, setRenderedData] = useState(<></>);
     const [shake, setShake] = useState(false);
     const [loading, setLoading] = useState(false);
     const promptRef = useRef<HTMLInputElement>(null);
     const [model, setModel] = useState<"gpt3.5" | "gemini">("gpt3.5");
-
+    const [answer, setAnswer] = useState("");
     const handleSelectChange = (value: "gpt3.5" | "gemini") => {
         setModel(value);
     };
@@ -52,6 +55,26 @@ export default function Modal() {
         } else if (modalState === modalEnum.clear_news) {
             clearNews();
             handleClose();
+        } else if (modalState === modalEnum.question_article) {
+            const prompt = promptRef.current?.value;
+            if (!prompt) {
+                setShake(true);
+                setTimeout(() => setShake(false), 1500);
+            } else {
+                if (questionArticle !== null) {
+                    setLoading(true);
+                    setAnswer(
+                        await answerQuestion(
+                            prompt,
+                            questionArticle.content +
+                                questionArticle.articles
+                                    .map((a) => a.content)
+                                    .join("")
+                        )
+                    );
+                    setLoading(false);
+                }
+            }
         }
     };
 
@@ -113,12 +136,32 @@ export default function Modal() {
                         </div>
                     </div>
                 );
+            else if (modalState === modalEnum.question_article)
+                return (
+                    <div>
+                        <h3 className="font-bold text-2xl w-full text-center  text-black-800 ">
+                            Enter a question
+                        </h3>
+                        <div className="py-4 flex gap-2">
+                            <input
+                                type="text"
+                                name="prompt"
+                                className={`w-full bg-cream-100 rounded-md p-2 `}
+                                ref={promptRef}
+                            />
+                        </div>
+                        <p className="bg-grey-100 my-4 p-4 rounded-lg">
+                            <Markdown>{answer}</Markdown>
+                        </p>
+                    </div>
+                );
+
             return <div></div>;
         };
         if (modalState === modalEnum.closed) return;
         setRenderedData(renderContent());
-    }, [modalState]);
-
+    }, [modalState, answer]);
+    console.log(answer);
     return (
         <div
             className={`w-full h-full fixed top-0 left-0 fadeInOut flex justify-center p-16 ${
