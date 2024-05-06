@@ -12,17 +12,17 @@ export function refreshTemplate(
             availableSpace: 0,
         };
 
-    if (oldConfig.availableSpace < articles.length) {
+    while (oldConfig.availableSpace < articles.length) {
+        let a;
         const [areas, newTemplateArea] = generateSubTemplate();
-        return {
-            gridTemplateArea: oldConfig.gridTemplateArea + newTemplateArea,
-            areas: [...oldConfig.areas, ...areas],
-            availableSpace: oldConfig.availableSpace + areas.length,
-        };
-    } else {
-        //I know its stupid..
-        return oldConfig;
+        oldConfig.gridTemplateArea =
+            oldConfig.gridTemplateArea + newTemplateArea;
+        oldConfig.areas = [...oldConfig.areas, ...areas];
+        oldConfig.availableSpace = oldConfig.availableSpace + areas.length;
     }
+    console.log(oldConfig);
+
+    return oldConfig;
 }
 
 function generateSubTemplate(): [string[], string] {
